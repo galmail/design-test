@@ -1,0 +1,17 @@
+@mixin flex-box($wrapstyle) {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-flow: row $wrapstyle;
+  -webkit-flex-flow: row $wrapstyle;
+}
+
+@mixin centered() {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}

@@ -1,0 +1,337 @@
+@import "mixins.scss";
+$breakpoint: 720px;
+
+body {
+    padding: 2em;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-weight: 300;
+}
+
+h1, h2, h3 {
+    font-family: Times;
+    font-weight: 300;
+    margin: 20px 0 0;
+}
+
+h1 {
+  font-size: 26px;
+}
+
+h2 {
+  font-size: 22px;
+}
+
+.wrapper {
+  @include flex-box(wrap);
+  text-align: center;
+  height: 100vh;
+
+  > * {
+    padding: 10px;
+    flex: 1 100%;
+  }
+}
+
+
+header {
+  @include flex-box(no-wrap);
+  justify-content: space-between;
+
+  .logo {
+    color: white;
+    background: grey;
+    order: 1;
+    height: 50px;
+    flex-basis: 50px;
+    line-height: 50px;
+  }
+
+  .name {
+    font-family: cursive;
+    font-size: 30px;
+    order: 2;
+    line-height: 50px;
+    text-align: left;
+    padding-left: 10px;
+    flex-grow: 3;
+  }
+}
+
+.navbar {
+  margin: 20px auto 0;
+
+  .toggle {
+    border: 1px solid black;
+    background: grey;
+    display: block;
+    line-height: 30px;
+    font-size: 22px;
+    width: 140px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: $breakpoint) {
+    &:hover, &:active {
+
+      ul {
+        display: inline-block;
+        position: absolute;
+        left: 0;
+        right: 0;
+        z-index: 100;
+
+        li {
+          display: block;
+          line-height: 40px;
+          border: 1px solid darkgrey;
+        }
+      }
+    }
+  }
+
+  ul {
+    background: lightgrey;
+    border: 1px solid black;
+    width: 140px;
+    padding: 0;
+    margin: 0 auto;
+    display: none;
+  
+    li {
+      list-style-type: none;
+      font-size: 20px;
+      display: none;
+    }
+  }
+}
+
+article {
+  .header {
+    height: 80px;
+
+    .title {
+      display: inline-block;
+      vertical-align: bottom;
+    }
+  }
+
+  // Links go to the bottom on mobile
+  display: table;
+  
+  .highlights {
+    display: table-footer-group;
+    float: none;
+    margin: 0 10px 10px;
+
+    ul {
+      margin: 0;
+      padding: 0 0 20px 20px;
+    }
+  }
+}
+
+.footer {
+  background: lightgrey;
+}
+
+
+.main {
+  text-align: left;
+  padding: 10px 0; 
+}
+
+.aside {
+  display: none;
+  text-align: left;
+}
+
+// Resoponsive, ratio-aware placeholders
+.placeholder {
+  width: 100%;
+  display: inline-block;
+  position: relative;
+
+  &:after {
+    display: block;
+    content: "";
+  }
+
+  &.square {
+    .image {
+      &:before {
+        content: "1:1";
+      }
+    }
+    &:after {
+      padding-top: 100%;
+    }
+  }
+
+  &.rectangle {
+    .image {
+      &:before {
+        content: "3:4";
+      }
+    }
+    &:after {
+      padding-top: 75%;
+    }
+  }
+
+  .image {
+    @include centered();
+    background-color: grey;
+    text-align: center;
+    font-size: 60px;
+    line-height: 60px;
+    color: white;
+    &:before {
+      position: absolute;
+      top: calc(50% - 30px);
+      left: calc(50% - 40px);
+    }
+  }
+}
+
+.social {
+  display: block;
+  order: 3;
+
+  ul {
+      padding: 0;
+      margin: 0;
+
+    li {
+      list-style-type: none;
+      display: inline-block;
+      border-radius: 50%;
+      height: 60px;
+      width: 60px;
+      margin: 5px;
+      display: inline-block;
+      position: relative;
+
+      &:before {
+        content: "";
+        background-repeat: no-repeat;
+        position: absolute;
+        left: 15px;
+      }
+
+      &.facebook {
+        background: #3b5998;
+        &:before {
+          background-image: url("../img/facebook.png");
+          background-size: 30px;
+          height: 30px;
+          width: 30px;
+          top: 15px;
+        }
+      }
+      &.twitter {
+        background: #4099ff;
+        &:before {
+          background-image: url("../img/twitter.png");
+          background-size: 32px;
+          height: 32px;
+          width: 32px;
+          top: 17px;
+        }
+      }
+      &.google {
+        background: #dd4b39;
+        &:before {
+          background-image: url("../img/google.png");
+          background-size: 37px;
+          height: 37px;
+          width: 37px;
+          top: 17px;
+        }
+      }
+    }
+  }
+
+  header & {
+    display: none;
+  }
+}
+
+
+@media screen and (min-width: $breakpoint) {
+
+
+  h1 {
+    font-size: 32px;
+  }
+
+  header {
+
+    .logo {
+      height: 70px;
+      flex-basis: 70px;
+      line-height: 70px;
+    }
+
+    .name {
+      font-size: 40px;
+      line-height: 65px;
+    }
+  }
+
+  article {
+
+    // Links float right on desktop
+    .highlights {
+      float: right;
+    }
+
+    // bigger margins and fonts on desktop
+    margin: 0 10px;
+    
+    p {
+      font-size: 18px;
+    }
+  }
+
+  .navbar {
+    ul { 
+      @include flex-box(no-wrap);
+      justify-content: space-between;
+      background: lightgrey;
+      border: 1px solid black;
+      width: 100%;
+
+      li {
+        font-size: 22px;
+        margin: 10px;
+        display: inline-block;
+      }
+    }
+
+    .toggle {
+      display: none;
+    }
+  }
+
+  .aside {
+    order: 2;
+    flex: 1 1 80px;
+    display: block;
+  }
+
+  .main {
+    order: 1;
+    flex: 3 0 100px;
+  }
+
+  .footer {
+    order: 3;
+    display: none;
+  }
+
+  .social {
+    header & {
+      display: block;
+    }
+  }
+}
