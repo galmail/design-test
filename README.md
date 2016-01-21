@@ -1,6 +1,6 @@
 # README #
 
-This project is a part of a design test.
+This project is part of a design test.
 
 The Tech Stack for this project includes:
 
